@@ -1,0 +1,44 @@
+.inner-enter {
+    opacity: 0;
+    transform: translate(-50%, -80%);
+    transition: opacity 350ms ease-in, transform  350ms ease-in;
+}
+.inner-enter-active {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition: opacity 350ms ease-in, transform  350ms ease-in;
+}
+.inner-exit {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition: opacity 350ms ease-in, transform  350ms ease-in;
+}
+
+.inner-exit-active {
+    opacity: 0;
+    transform: translate(-50%, -80%);
+    transition: opacity 350ms ease-in, transform  350ms ease-in;
+}
+
+.modal {
+    opacity: 0;
+}
+
+.modal-enter {
+    opacity: 0;
+    transition: opacity 350ms ease-in;
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transition: opacity 350ms ease-in;
+}
+
+.modal-exit {
+    opacity: 1;
+}
+
+.modal-exit-active {
+    opacity: 0;
+    transition: opacity 350ms ease-in;
+}

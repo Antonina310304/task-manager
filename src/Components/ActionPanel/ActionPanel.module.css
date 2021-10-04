@@ -1,0 +1,13 @@
+.panel {
+
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0;
+}
+
+.button {
+    max-width: 200px;
+}

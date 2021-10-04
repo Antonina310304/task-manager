@@ -1,0 +1,28 @@
+.button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #9196b5;
+    border-radius: 3px;
+    text-transform: uppercase;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 700;
+    color: #9196b5;
+}
+
+.button.delete {
+    border: 1px solid #b591a8;
+    color: #b591a8;
+}
+
+.button[disabled] {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.button.change {
+    border: 1px solid #92b591;
+    color: #92b591;
+}
