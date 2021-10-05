@@ -1,0 +1,19 @@
+.icon {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.close {
+    transition: transform 0.4s;
+}
+
+.close:hover {
+    transform: rotate(1turn);
+}
+.svg {
+    width: 20px;
+    height: 20px;
+}

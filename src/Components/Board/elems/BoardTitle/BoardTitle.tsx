@@ -1,21 +1,18 @@
 import React, { memo } from 'react';
-import styles from "../../Board.module.css";
+import styles from '../../Board.module.css';
 
 export interface BoardTitleProps {
-    count: number;
+  count: number;
 }
 
-const BoardTitle = ({count}: BoardTitleProps) => {
-
-    return (
+const BoardTitle = ({ count }: BoardTitleProps) => (
         <div className={styles.headerBlock}>
             <h1 className={styles.title}>{count ? 'Список задач' : 'У вас пока нет задач'}</h1>
-            {(count > 0) &&
-                <p className={styles.subtitle}>всего {count} задач</p>
+            {(count > 0)
+                && <p className={styles.subtitle}>всего {count} задач</p>
             }
         </div>
 
-    );
-};
+);
 
 export default memo(BoardTitle);

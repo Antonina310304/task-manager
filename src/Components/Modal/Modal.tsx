@@ -1,9 +1,11 @@
-import React, { memo, ReactNode } from "react";
-import styles from "./Modal.module.css";
-import ButtonClose from "../../UI/ButtonClose";
-import { CSSTransition } from "react-transition-group";
+import React, { memo, ReactNode } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import styles from './Modal.module.css';
+import './animation-styles.css';
 
-import "./styles.css";
+import Icon from '../../primitives/Icon';
+
+import Button from '../../primitives/Button';
 
 export interface ModalType {
   className?: string;
@@ -13,34 +15,36 @@ export interface ModalType {
   hideModal: () => void;
 }
 
-const Modal = ({ isShowModal, hideModal, title, children }: ModalType) => {
-  return (
-    <div>
-      <CSSTransition
-        onClick={hideModal}
-        in={isShowModal}
-        unmountOnExit
-        timeout={350}
-        classNames="modal"
-      >
-        <div className={styles.wrapper}></div>
-      </CSSTransition>
+const Modal = ({
+  isShowModal, hideModal, title, children,
+}: ModalType) => (
+  <div>
+    <CSSTransition
+      onClick={hideModal}
+      in={isShowModal}
+      unmountOnExit
+      timeout={350}
+      classNames="modal"
+    >
+      <div className={styles.wrapper}></div>
+    </CSSTransition>
 
-      <CSSTransition
-        in={isShowModal}
-        timeout={350}
-        classNames="inner"
-        unmountOnExit
-        onClick={(e: any) => e.stopPropagation()}
-      >
-        <div className={styles.inner}>
-          <ButtonClose onClick={hideModal} className={styles.close} />
-          {title && <p className={styles.title}>{title}</p>}
-          {children}
-        </div>
-      </CSSTransition>
-    </div>
-  );
-};
+    <CSSTransition
+      in={isShowModal}
+      timeout={350}
+      classNames="inner"
+      unmountOnExit
+      onClick={(event: React.FormEvent) => event.stopPropagation()}
+    >
+      <div className={styles.inner}>
+        <Button view={'icon'} onClick={hideModal} className={styles.close}>
+          <Icon icon={'close'}/>
+        </Button>
+        {title && <p className={styles.title}>{title}</p>}
+        {children}
+      </div>
+    </CSSTransition>
+  </div>
+);
 
 export default memo(Modal);

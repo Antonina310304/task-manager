@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { Keys } from "../types";
-import ERRORS_ALERT from "../Utils/errors-alert";
+import { useEffect, useState } from 'react';
+import { Keys } from '../types';
+// eslint-disable-next-line import/extensions
+import ERRORS_ALERT from '../utils/errors-alert';
 
 /**
  * валидация поля
@@ -12,16 +13,16 @@ import ERRORS_ALERT from "../Utils/errors-alert";
 
 const useValidation = (value: any, validations: any) => {
   const [isErrors, setErrors] = useState<Keys>({
-    isEmpty: true,
-    minLength: true,
+    isEmpty: false,
+    minLength: false,
   });
 
-  const [textError, setTextError] = useState("");
-  console.log(!value);
+  const [textError, setTextError] = useState('');
   useEffect(() => {
     Object.keys(validations).forEach((validation) => {
       switch (validation) {
-        case "minLength":
+        case 'minLength':
+        // eslint-disable-next-line no-case-declarations
           const isMinLength = value.length <= validations[validation];
           if (isMinLength) {
             setTextError(ERRORS_ALERT.minLength);
@@ -31,19 +32,20 @@ const useValidation = (value: any, validations: any) => {
             minLength: isMinLength,
           }));
           break;
-        case "isEmpty":
+        case 'isEmpty':
           if (!value) {
             setTextError(ERRORS_ALERT.isEmpty);
           }
           setErrors((prevState) => ({ ...prevState, isEmpty: !value }));
           break;
+        default:
+          break;
       }
     });
   }, [validations, value]);
-
   return {
     error: Object.values(isErrors).some((error) => error),
-    textError: textError,
+    textError,
   };
 };
 

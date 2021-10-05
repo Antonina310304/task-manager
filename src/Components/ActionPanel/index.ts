@@ -1,1 +1,2 @@
-export { default } from "./ActionPanel";
+// @ts-ignore
+export { default } from './ActionPanel.tsx';

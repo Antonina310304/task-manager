@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import useValidation from "./useValidation";
-import { TypesErrors } from "../types";
+import React, { useCallback, useState } from 'react';
+
+import { TypesErrors } from '../types';
+
+import useValidation from './useValidation';
 
 /**
  * хук состояние инпута
@@ -13,6 +15,7 @@ import { TypesErrors } from "../types";
  * @return isDirty первое изменение инпута
  * @return ...isValid error  boolean ошибки поля textError тестовое описание ошибки
  * */
+
 const useInput = (initialValue: any, validationRules: TypesErrors) => {
   const [value, setValue] = useState(initialValue);
   const [isDirty, setIsDirty] = useState(false);
@@ -20,14 +23,15 @@ const useInput = (initialValue: any, validationRules: TypesErrors) => {
 
   const isValid = useValidation(value, validationRules);
 
-  const onChange = (value: React.SetStateAction<string>) => {
-    setValue(value);
+  const onChange = useCallback((val: React.SetStateAction<string>) => {
+    setValue(val);
     setIsBlur(false);
     setIsDirty(true);
-  };
-  const onBlur = () => {
+  }, []);
+
+  const onBlur = useCallback(() => {
     setIsBlur(true);
-  };
+  }, []);
 
   return {
     value,

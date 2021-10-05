@@ -2,7 +2,7 @@
     font-size: 24px;
     line-height: 150%;
     font-weight: 500;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--font-roboto);
     margin: 0 0 15px;
     text-align: center;
 }
@@ -13,7 +13,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(149, 147, 152, 0.5);
+    background: var(--color-opacity-gray);
 }
 
 
@@ -24,7 +24,7 @@
 }
 
 .inner {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -34,14 +34,14 @@
     box-sizing: border-box;
     height: auto;
     border-radius: 4px;
-    box-shadow: 0 0 10px 3px rgb(149 147 152);
+    box-shadow: 0 0 10px 3px var(--color-dirty-gray);
 }
 
 .title {
     font-size: 24px;
     line-height: 150%;
     font-weight: 500;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--font-roboto);
     margin: 0 0 15px;
     text-align: center;
 }

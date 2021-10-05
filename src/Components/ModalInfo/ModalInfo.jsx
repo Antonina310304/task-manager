@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import Modal from "../Modal/Modal";
-import Button from "../Button/Button";
+import Button from "../../primitives/Button/Button";
 
 const ModalInfo = ({ isShowModal, title, modalText, hideModal }) => {
   return (

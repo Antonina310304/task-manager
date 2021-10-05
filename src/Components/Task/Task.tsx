@@ -1,35 +1,33 @@
-import React, { memo } from "react";
-import { TaskData, taskStatusData } from "../../types";
-import Button from "../Button";
-import styles from "./Task.module.css";
-import cn from "classnames";
+import React, { memo, useCallback, useContext } from 'react';
+import cn from 'classnames';
+import { TaskDataExpanded } from '../../types';
+import Button from '../../primitives/Button';
+import styles from './Task.module.css';
+import { TaskListContext } from '../../taskContext/TaskContext';
+import { ModalContext } from '../ModalProvider/ModalProvider';
+import statusType from '../../static/statusType';
 
 export interface TaskProps {
-  taskData: TaskData;
-  removeTask: (arg: number) => void;
+  taskData: TaskDataExpanded;
   showTaskDetails: (arg: number) => void;
-  changeTask: (arg: TaskData) => void;
 }
 
 const Task = ({
   taskData,
-  removeTask,
   showTaskDetails,
-  changeTask,
 }: TaskProps) => {
-  const statusType: Record<taskStatusData, string> = {
-    done: "Выполнено",
-    progress: "Выполняется",
-    created: "Создана",
-  };
+  // @ts-ignore
+  const { changeTask, removeTask } = useContext(TaskListContext);
+  const { showModalInfo } = useContext(ModalContext);
 
-  function remove() {
+  const remove = useCallback(() => {
     removeTask(taskData.id);
-  }
+    showModalInfo(`Задача ${taskData.title} удалена`);
+  }, [removeTask, taskData.id]);
 
-  function checkTask() {
+  const change = useCallback(() => {
     changeTask({ ...taskData, checked: !taskData.checked });
-  }
+  }, [changeTask, taskData]);
 
   return (
     <div className={cn(styles.task, { [styles.checked]: taskData.checked })}>
@@ -38,14 +36,14 @@ const Task = ({
         id={`task-${taskData.id}`}
         type="checkbox"
         checked={taskData.checked}
-        onChange={checkTask}
+        onChange={change}
       />
       <label
         htmlFor={`task-${taskData.id}`}
         className={cn(styles.status, {
-          [styles.create]: taskData.status === "created",
-          [styles.done]: taskData.status === "done",
-          [styles.progress]: taskData.status === "progress",
+          [styles.create]: taskData.status === 'created',
+          [styles.done]: taskData.status === 'done',
+          [styles.progress]: taskData.status === 'progress',
         })}
       >
         <p className={styles.statusName}>{statusType[taskData.status]}</p>

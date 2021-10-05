@@ -1,7 +1,11 @@
-import { taskStatusData } from "../types";
+import { TaskStatusData } from '../types';
 
-export const statusType: Record<taskStatusData, string> = {
-  done: "Выполнено",
-  progress: "Выполняется",
-  created: "Создана",
+export type StatusTypeProps = Record<TaskStatusData, string>;
+
+const statusType: StatusTypeProps = {
+  done: 'Выполнено',
+  progress: 'Выполняется',
+  created: 'Создана',
 };
+
+export default statusType;
