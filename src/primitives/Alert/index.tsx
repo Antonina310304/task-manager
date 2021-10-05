@@ -9,10 +9,10 @@ export interface FormErrorProps {
 
 const Alert = ({ className, textError }: FormErrorProps) => (
   <div className={cn(className, styles.wrapper)}>
-    <p className={styles.error}>
-      {textError || 'Заполните поле корректно!'}
-    </p>
-  </div>
+<p className={styles.error}>
+  {textError || 'Заполните поле корректно!'}
+</p>
+</div>
 );
 
 export default memo(Alert);

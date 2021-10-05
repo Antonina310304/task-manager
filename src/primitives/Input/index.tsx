@@ -28,19 +28,19 @@ const Input = ({
   type,
 }: InputProps) => (
   <div className={styles.wrapper}>
-    <input
-      className={styles.input}
-      name={inputName}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      type={type || 'text'}
-      placeholder={placeholder}
-      value={value}
-      defaultValue={defaultValue}
-      disabled={disabled}
-    />
-  </div>
+  <input
+    className={styles.input}
+name={inputName}
+onChange={onChange}
+onFocus={onFocus}
+onBlur={onBlur}
+type={type || 'text'}
+placeholder={placeholder}
+value={value}
+defaultValue={defaultValue}
+disabled={disabled}
+/>
+</div>
 );
 
 export default memo(Input);

@@ -7,20 +7,17 @@ import Container from '../Container';
 import styles from './ActionPanel.module.css';
 import declOfNum from '../../utils/declOfNum';
 import { TaskListContext } from '../../taskContext/TaskContext';
-import { ModalContext } from '../ModalProvider/ModalProvider';
 
 export interface HeaderProps {
-  createNewTask: () => void;
+  onCreateNewTask: () => void;
+  onShowModalInfo: (data: string) => void;
 }
 
-const ActionPanel = ({
-  createNewTask,
-}: HeaderProps) => {
+const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   const {
-  // @ts-ignore
     tasks, changeTask, removeTask,
   } = useContext(TaskListContext);
-  const { showModalInfo } = useContext(ModalContext);
+
   const [isEnabledRemove, setIsEnabledRemove] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState({
     selected: false,
@@ -56,7 +53,7 @@ const ActionPanel = ({
         titles,
       )}`;
 
-    showModalInfo(titleModal);
+    onShowModalInfo(titleModal);
   }, [tasks, removeTask]);
 
   /**
@@ -80,7 +77,7 @@ const ActionPanel = ({
   return (
     <Container className={styles.panel}>
       <div className={styles.wrapper}>
-        <Button className={styles.button} view="change" onClick={createNewTask}>
+        <Button className={styles.button} view="change" onClick={onCreateNewTask}>
           создать задачу
         </Button>
         <Button

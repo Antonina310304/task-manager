@@ -4,25 +4,24 @@ import { TaskDataExpanded } from '../../types';
 import Button from '../../primitives/Button';
 import styles from './Task.module.css';
 import { TaskListContext } from '../../taskContext/TaskContext';
-import { ModalContext } from '../ModalProvider/ModalProvider';
 import statusType from '../../static/statusType';
 
 export interface TaskProps {
   taskData: TaskDataExpanded;
   showTaskDetails: (arg: number) => void;
+  onShowModalInfo: (arg: string) => void;
 }
 
 const Task = ({
   taskData,
   showTaskDetails,
+  onShowModalInfo,
 }: TaskProps) => {
-  // @ts-ignore
   const { changeTask, removeTask } = useContext(TaskListContext);
-  const { showModalInfo } = useContext(ModalContext);
 
   const remove = useCallback(() => {
     removeTask(taskData.id);
-    showModalInfo(`Задача ${taskData.title} удалена`);
+    onShowModalInfo(`Задача ${taskData.title} удалена`);
   }, [removeTask, taskData.id]);
 
   const change = useCallback(() => {

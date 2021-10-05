@@ -19,21 +19,21 @@ const Select = ({
   values,
   onChange,
 }: SelectProps) => (
-    <div className={className}>
-      <select
-        className={styles.select}
-        data-name={name}
-        name={name}
-        defaultValue={defaultValue}
-        onChange={onChange}
-      >
-        {Object.keys(values).map((item) => (
-          <option key={item} value={item}>
-            {values[item as TaskStatusData]}
-          </option>
-        ))}
-      </select>
-    </div>
+  <div className={className}>
+  <select
+    className={styles.select}
+data-name={name}
+name={name}
+defaultValue={defaultValue}
+onChange={onChange}
+  >
+  {Object.keys(values).map((item) => (
+      <option key={item} value={item}>
+    {values[item as TaskStatusData]}
+    </option>
+  ))}
+</select>
+</div>
 );
 
 export default memo(Select);

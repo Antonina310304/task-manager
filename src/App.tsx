@@ -1,18 +1,25 @@
 import React from 'react';
 import './App.css';
 import './theme.css';
-import Main from './components/Main';
-
+import {
+  BrowserRouter, Redirect, Route, Switch,
+} from 'react-router-dom';
 import TaskContext from './taskContext/TaskContext';
-import ModalProvider from './components/ModalProvider/ModalProvider';
+import Main from './pages/Main';
+import Error from './pages/Error';
 
 function App() {
   return (
-    <ModalProvider>
-      <TaskContext>
-        <Main/>
-      </TaskContext>
-    </ModalProvider>
+    <TaskContext>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={Main}/>
+        <Route path='/error' component={Error}/>
+        <Redirect to='/error'/>
+      </Switch>
+    </BrowserRouter>
+    </TaskContext>
+
   );
 }
 

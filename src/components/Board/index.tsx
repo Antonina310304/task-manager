@@ -3,17 +3,15 @@ import Task from '../Task';
 import styles from './Board.module.css';
 import BoardTitle from './elems/BoardTitle';
 import Container from '../Container';
-// @ts-ignore
-import { TaskListContext } from '../../taskContext/TaskContext.tsx';
+import { TaskListContext } from '../../taskContext/TaskContext';
 import { TaskDataExpanded } from '../../types';
 
 export interface TaskListProps {
-  showTaskDetails: (arg: number) => void;
+  onShowTaskDetails: (arg: number) => void;
+  onShowModalInfo: (arg: string) => void;
 }
 
-const Board = ({
-  showTaskDetails,
-}: TaskListProps) => {
+const Board = ({ onShowModalInfo, onShowTaskDetails }: TaskListProps) => {
   const { tasks } = useContext(TaskListContext);
   return (
     <div className={styles.board}>
@@ -22,7 +20,8 @@ const Board = ({
         {tasks.map((item: TaskDataExpanded) => (
           <div className={styles.boardItem} key={item.id}>
             <Task
-              showTaskDetails={showTaskDetails}
+              showTaskDetails={onShowTaskDetails}
+              onShowModalInfo={onShowModalInfo}
               taskData={item}
             />
           </div>

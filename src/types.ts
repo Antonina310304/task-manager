@@ -1,5 +1,4 @@
 export type TaskStatusData = 'done' | 'progress' | 'created';
-export type IconType = 'close';
 
 export type State = 'create' | 'change';
 
@@ -48,3 +47,11 @@ export type DisplayFieldsType = Record<ValidatedFields, any> &
 };
 
 export type ActionType = 'checked' | 'remove' | 'change';
+
+export interface RemoveTaskProps {
+  (arg: number): void
+}
+
+export interface ChangeTaskProps {
+  (arg: TaskDataExpanded): void
+}

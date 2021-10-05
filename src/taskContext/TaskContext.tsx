@@ -1,10 +1,20 @@
 import React, {
   createContext, ReactElement, ReactNode, useCallback, useReducer,
 } from 'react';
-import { ActionType, TaskData, TaskDataExpanded } from '../types';
+import {
+  ActionType, ChangeTaskProps, RemoveTaskProps, TaskData, TaskDataExpanded,
+} from '../types';
 import taskList from '../store';
 
-export const TaskListContext = createContext({});
+interface TaskListContextProps {
+  tasks: TaskDataExpanded[] | [];
+  removeTask: RemoveTaskProps;
+  changeTask: ChangeTaskProps;
+}
+
+export const TaskListContext = createContext<TaskListContextProps>({
+  tasks: [], removeTask: () => {}, changeTask: () => {},
+});
 
 /** т.к. состояние выделения задачи нужно только для интерфейса,
  * я добавляю нужные поля через функцию init */
