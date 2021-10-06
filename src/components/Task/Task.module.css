@@ -1,0 +1,110 @@
+.task {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 0 1px var(--color-light-gray), 0px 0px 5px 0px var(--color-middle-gray);
+}
+
+.checked {
+    box-shadow: 0 0 5px 0 var(--color-dark-red);
+}
+
+.wrapperXs {
+    margin-bottom: 8px;
+}
+
+.wrapperXs:last-child {
+    margin-bottom: 0;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+}
+
+
+.status {
+    margin: 0;
+    padding: 8px 10px;
+    font-family:  var(--font-roboto);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    display: block;
+    position: relative;
+    padding-left: 45px;
+    cursor: pointer;
+}
+
+.status:before {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background: var(--color-white);
+    display: block;
+    border: 1px solid var(--color-gray);
+}
+
+.input {
+    display: none;
+}
+
+.input:checked ~ .status:after {
+    position: absolute;
+    display: block;
+    width: 9px;
+    content: '';
+    height: 4px;
+    border-left: 2px solid var(--color-purple);
+    border-bottom: 2px solid var(--color-purple);
+    top: 50%;
+    transform: translateY(-70%) rotate(-45deg);
+    left: 18px;
+}
+
+.statusName {
+    margin: 0;
+}
+
+.create {
+    background: var(--color-alert);
+}
+.input:checked ~.create:after {
+    border-color: var(--color-alert);
+}
+
+.done {
+    background: var(--color-purple);
+}
+
+.input:checked ~.done:after {
+    border-color: var(--color-purple);
+}
+
+.progress {
+    background: var(--color-green);
+}
+
+.input:checked ~.progress:after {
+    border-color: var(--color-green);
+}
+
+.hover {
+    box-shadow: 0px 0px 5px 0px var(--color-red);
+}
+
+.title {
+    margin: 0 0 10px;
+}
+
+.title:last-child {
+    margin-bottom: 0;
+}

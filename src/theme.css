@@ -1,0 +1,27 @@
+:root {
+    --font-roboto: 'Roboto Condensed', sans-serif;
+    --font-open-sans: 'Open Sans', sans-serif;
+}
+:root {
+    --color-grafit: #35364c;
+    --color-default: #91a0b5;
+
+    --color-dirty-gray: #959398;
+    --color-opacity-gray: rgba(149, 147, 152, 0.5);
+    --color-middle-gray: #e4e4e4;
+    --color-light-gray: #eaeaea;
+    --color-gray: #9e9b9b;
+
+    --color-alert: #e4a3a6;
+    --color-white: #ffffff;
+
+    --color-dark-red: #631e1e;
+    --color-red: #921010;
+
+    --color-green: #a3e4a8;
+    --color-dark-green: #92b591;
+
+    --color-purple: #b9a3e4;
+    --color-light-purple: #b591a8;
+    --color-dark-purple: #9196b5;
+}

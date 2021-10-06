@@ -1,0 +1,8 @@
+.wrapper {
+}
+
+.error {
+    color: var(--color-alert);
+    margin: 0;
+    font-family: var(--font-roboto);
+}
