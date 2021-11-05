@@ -24,11 +24,16 @@ const Nav = ({
         <div className={styles.wrapper}>
             <Container>
                 <div className={styles.links}>
-                    {links.map((item, idx) => (
-                        <Link className={'styles.link'} view={'nav'} type={TypeLinkData.nav} key={idx} href={item.href}>
+                    {links.filter((item: any) => item.autAccess === isAuth)
+                      .map((item: any, idx: number) => (
+                        <Link className={history.location.pathname === item.href ? styles.active : ''}
+                              key={idx}
+                              view={'nav'}
+                              type={TypeLinkData.nav}
+                              href={item.href}>
                             {item.title}
                         </Link>
-                    ))}
+                      ))}
                     <Link className={'styles.link'} view={'nav'} type={TypeLinkData.button} onClick={onClick}>
                         {isAuth ? 'Выйти' : 'Войти'}
                     </Link>

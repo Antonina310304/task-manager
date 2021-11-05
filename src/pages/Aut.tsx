@@ -1,20 +1,20 @@
 import React, { memo, useCallback } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import Link from '../primitives/Link';
 import Container from '../components/Container';
 
-interface AutProps {
+interface AutProps extends RouteComponentProps {
   setAuth: (arg: (prevState: boolean) => boolean) => void;
-  route?: any
 }
 
-const Aut = ({ setAuth, route }: AutProps) => {
+const Aut = ({ setAuth, history }: AutProps) => {
   const onClick = useCallback(() => {
     setAuth((prevState: boolean) => (!prevState));
-    route.history.push('/');
+    history.push('/');
   }, []);
   return (
         <Container>
-            <p>Для просмотра задач необходимо авторизоваться!</p>
+            <p>Аторизуйстесь, чтобы получить доступ к задачам!</p>
             <Link type={'button'}
                   view={'default'}
                   onClick={onClick}

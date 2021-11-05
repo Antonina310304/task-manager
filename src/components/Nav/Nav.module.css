@@ -3,6 +3,6 @@
     justify-content: flex-start;
 }
 
-.link {
-    background: green;
+.active {
+    color: var(--color-purple);
 }

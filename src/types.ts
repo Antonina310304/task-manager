@@ -1,3 +1,6 @@
+import { ComponentType } from 'react';
+import ANY from './static/any';
+
 export type TaskStatusData = 'done' | 'progress' | 'created';
 
 export type State = 'create' | 'change';
@@ -58,7 +61,12 @@ export interface ChangeTaskProps {
 }
 export interface LinkProps {
   href: string;
+  autAccess: boolean | typeof ANY;
   title: string;
+  path: string;
+  nav: boolean;
+  component: ComponentType<any>;
+  exact: boolean;
 }
 
 export type TypeLink = 'nav' | 'link' | 'button';

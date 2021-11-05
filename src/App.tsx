@@ -1,46 +1,68 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css';
 import './theme.css';
 import {
   BrowserRouter, Redirect, Route, Switch,
 } from 'react-router-dom';
 
+import ANY from './static/any';
 import TaskContext from './taskContext/TaskContext';
 import Main from './pages/Main';
 import Error from './pages/Error';
-import { LinkProps } from './types';
 import Nav from './components/Nav';
 import TaskPage from './pages/TaskPage';
 import Aut from './pages/Aut';
-
-const links: LinkProps[] = [
-  { href: '/', title: 'Главная' },
-  { href: '/error', title: 'Ошибка' },
-];
+import Description from './pages/Description';
+import Personal from './pages/Personal';
+import { LinkProps } from './types';
 
 function App() {
   const [isAuth, setAuth] = useState(false);
 
+  const WithAut = (props: any) => <Aut {...props} setAuth={setAuth}/>;
+  const WithPersonal = (props: any) => <Personal {...props} setAuth={setAuth}/>;
+
+  const links: LinkProps[] = useMemo(() => (
+    [
+      {
+        href: '/', title: 'Главная', autAccess: true, path: '/', nav: true, component: Main, exact: true,
+      },
+      {
+        href: 'error', title: '404 ошибка', autAccess: ANY, path: '/error', nav: false, component: Error, exact: false,
+      },
+      {
+        href: 'task', title: 'Детальная задачи', autAccess: true, path: '/task/:id', nav: false, component: TaskPage, exact: true,
+      },
+      {
+        href: '/', title: 'Описание', autAccess: false, path: '/', nav: true, component: Description, exact: true,
+      },
+      {
+        href: '/aut', title: 'Авторизация', autAccess: false, path: '/aut', nav: false, component: WithAut, exact: false,
+      },
+      {
+        href: '/personal', title: 'Личный кабинет', autAccess: true, path: '/personal', nav: true, component: WithPersonal, exact: false,
+      },
+    ]
+  ), []);
+
   return (
         <TaskContext>
             <BrowserRouter>
-                <Nav links={links} isAuth={isAuth} setAuth={setAuth}/>
-                {isAuth && (
+                <Nav links={links.filter((item: any) => item.nav)}
+                     isAuth={isAuth}
+                     setAuth={setAuth}/>
+                {
                     <Switch>
-                        <Route path='/' component={Main} exact/>
-                        <Route path='/error' component={Error}/>
-                        <Route path='/task/:id' component={TaskPage} exact/>
-                        <Redirect to='/error'/>
-                    </Switch>
-                )}
-                {!isAuth && (
-                    <Switch>
-                        <Route path='/aut' exact
-                               render={(props) => (<Aut route={props} setAuth={setAuth}/>)}/>
-                        <Redirect to='/aut'/>
+                        {links.filter((item: any) => item.autAccess === isAuth
+                            || item.autAccess === ANY)
+                          .map((item: any) => (
+                                <Route key={item.path} path={item.path}
+                                       component={item.component} exact={item.exact}/>
+                          ))}
+                        <Redirect to='/error' exact/>
                     </Switch>
 
-                )}
+                }
             </BrowserRouter>
         </TaskContext>
   );
