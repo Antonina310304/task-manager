@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import Modal from '../Modal';
-import Button from '../../primitives/Button';
+import Link from '../../primitives/Link';
 
 export interface ModalInfoProps {
   isShowModal: boolean;
@@ -16,9 +16,9 @@ const ModalInfo = ({
 <>
   <p>{modalText}</p>
 <div>
-<Button onClick={onHideModal} view={'change'}>
+<Link type={'button'} onClick={onHideModal} view={'primary'}>
   Огонь!
-  </Button>
+  </Link>
   </div>
   </>
   </Modal>

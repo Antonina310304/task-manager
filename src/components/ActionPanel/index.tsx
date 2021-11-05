@@ -2,11 +2,11 @@ import React, {
   memo, useCallback, useContext, useEffect, useState,
 } from 'react';
 import { TaskDataExpanded } from '../../types';
-import Button from '../../primitives/Button';
 import Container from '../Container';
 import styles from './ActionPanel.module.css';
 import declOfNum from '../../utils/declOfNum';
 import { TaskListContext } from '../../taskContext/TaskContext';
+import Link from '../../primitives/Link';
 
 export interface HeaderProps {
   onCreateNewTask: () => void;
@@ -77,25 +77,27 @@ const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   return (
     <Container className={styles.panel}>
       <div className={styles.wrapper}>
-        <Button className={styles.button} view="change" onClick={onCreateNewTask}>
+        <Link type={'button'} className={styles.button} view="primary" onClick={onCreateNewTask}>
           создать задачу
-        </Button>
-        <Button
+        </Link>
+        <Link
+          type={'button'}
           className={styles.button}
           onClick={toggleSelectionTasks}
-          view="change"
+          view="default"
           disabled={isSelected.disabled}
         >
           {isSelected.selected ? 'снять выделение' : 'выделить все'}
-        </Button>
-        <Button
+        </Link>
+        <Link
+          type={'button'}
           className={styles.button}
           view="delete"
           disabled={!isEnabledRemove}
           onClick={removeSelectedTask}
         >
           Удалить выделенное
-        </Button>
+        </Link>
       </div>
     </Container>
   );

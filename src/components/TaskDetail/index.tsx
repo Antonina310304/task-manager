@@ -6,8 +6,6 @@ import React, {
 
 import styles from './TaskDetail.module.css';
 
-import Button from '../../primitives/Button';
-
 import { TaskDataExpanded, ValidatedFields } from '../../types';
 import displayFields from '../../static/displayFields';
 import statusType from '../../static/statusType';
@@ -17,12 +15,13 @@ import Input from '../../primitives/Input';
 import useForm from '../../hooks/useForm';
 import validationRules from '../../static/validationRules';
 import transformDate from '../../utils/transformDate';
+import Link from '../../primitives/Link';
 
 export interface TaskDetailProps {
   className?: string;
   taskDataModal: { task: TaskDataExpanded; type: string };
   removeTask: (arg: number) => void;
-  hideModal: () => void;
+  hideModal?: () => void;
   changeTaskList: (data: TaskDataExpanded) => void;
 }
 
@@ -92,17 +91,17 @@ const TaskDetail = ({
       })}
       <div className={styles.buttonsGroup}>
         <div className={styles.buttonWrapper}>
-          <Button disabled={disabledBtn} onClick={onSave} view={'change'}>
+          <Link type={'button'} disabled={disabledBtn} onClick={onSave} view={'primary'}>
             {isNewTask ? 'Создать' : 'Сохранить'}
-          </Button>
+          </Link>
         </div>
 
         {!isNewTask && (
           <div className={styles.buttonWrapper}>
             <div>
-              <Button onClick={remove} view={'delete'}>
+              <Link type={'button'} onClick={remove} view={'delete'}>
                 Удалить
-              </Button>
+              </Link>
             </div>
           </div>
         )}

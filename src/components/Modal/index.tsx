@@ -5,7 +5,7 @@ import './animation-styles.css';
 
 import Icon from '../../primitives/Icon';
 
-import Button from '../../primitives/Button';
+import Link from '../../primitives/Link';
 
 export interface ModalType {
   className?: string;
@@ -37,9 +37,9 @@ const Modal = ({
       onClick={(event: React.FormEvent) => event.stopPropagation()}
     >
       <div className={styles.inner}>
-        <Button view={'icon'} onClick={hideModal} className={styles.close}>
+        <Link type={'button'} view={'icon'} onClick={hideModal} className={styles.close}>
           <Icon icon={'close'}/>
-        </Button>
+        </Link>
         {title && <p className={styles.title}>{title}</p>}
         {children}
       </div>

@@ -1,0 +1,8 @@
+.links {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.link {
+    background: green;
+}

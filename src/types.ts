@@ -47,6 +47,7 @@ export type DisplayFieldsType = Record<ValidatedFields, any> &
 };
 
 export type ActionType = 'checked' | 'remove' | 'change';
+export type ViewLink = 'default' | 'delete' | 'icon' | 'nav' | 'primary' | 'secondary';
 
 export interface RemoveTaskProps {
   (arg: number): void
@@ -55,3 +56,15 @@ export interface RemoveTaskProps {
 export interface ChangeTaskProps {
   (arg: TaskDataExpanded): void
 }
+export interface LinkProps {
+  href: string;
+  title: string;
+}
+
+export type TypeLink = 'nav' | 'link' | 'button';
+
+export const TypeLinkData:Record<TypeLink, TypeLink> = {
+  nav: 'nav',
+  link: 'link',
+  button: 'button',
+};

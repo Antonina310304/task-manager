@@ -1,10 +1,11 @@
 import React, { memo, useCallback, useContext } from 'react';
 import cn from 'classnames';
+
 import { TaskDataExpanded } from '../../types';
-import Button from '../../primitives/Button';
 import styles from './Task.module.css';
 import { TaskListContext } from '../../taskContext/TaskContext';
 import statusType from '../../static/statusType';
+import Link from '../../primitives/Link';
 
 export interface TaskProps {
   taskData: TaskDataExpanded;
@@ -54,14 +55,19 @@ const Task = ({
         </div>
         <div className={styles.buttonsWrapper}>
           <div className={styles.wrapperXs}>
-            <Button view="delete" onClick={remove}>
-              удалить
-            </Button>
+            <Link view='primary' href={`/task/${taskData.id}`} type={'link'} onClick={() => showTaskDetails(taskData.id)}>
+              подробнее
+            </Link>
           </div>
           <div className={styles.wrapperXs}>
-            <Button view="change" onClick={() => showTaskDetails(taskData.id)}>
+            <Link view="delete" onClick={remove} type={'button'}>
+              удалить
+            </Link>
+          </div>
+          <div className={styles.wrapperXs}>
+            <Link view="default" onClick={() => showTaskDetails(taskData.id)} type={'button'}>
               изменить
-            </Button>
+            </Link>
           </div>
         </div>
       </div>
