@@ -1,9 +1,9 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
+import { useSelector } from 'react-redux';
 import Task from '../Task';
 import styles from './Board.module.css';
 import BoardTitle from './elems/BoardTitle';
 import Container from '../Container';
-import { TaskListContext } from '../../taskContext/TaskContext';
 import { TaskDataExpanded } from '../../types';
 
 export interface TaskListProps {
@@ -12,7 +12,8 @@ export interface TaskListProps {
 }
 
 const Board = ({ onShowModalInfo, onShowTaskDetails }: TaskListProps) => {
-  const { tasks } = useContext(TaskListContext);
+  const tasks = useSelector((state: any) => state.tasks);
+  console.log(tasks);
   return (
     <div className={styles.board}>
       <BoardTitle count={tasks.length} />

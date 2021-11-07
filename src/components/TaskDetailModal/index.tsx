@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useContext } from 'react';
+import React, { memo, useCallback } from 'react';
 import Modal from '../Modal';
 import TaskDetail from '../TaskDetail';
 
-import { TaskListContext } from '../../taskContext/TaskContext';
 import { TaskDataExpanded } from '../../types';
+import StateType from '../../static/StateType';
 
 interface TaskDetailModalProps {
   taskDataModal: { isShow: boolean, task: TaskDataExpanded, type: string };
@@ -11,21 +11,22 @@ interface TaskDetailModalProps {
   onShowModalInfo: (arg: string) => void;
 }
 
+const modalTitle = {
+  CREATE: 'Создание задачи',
+  CHANGE: 'Изменение задачи',
+};
+
 const TaskDetailModal = ({
   hideModal,
   taskDataModal,
   onShowModalInfo,
 }: TaskDetailModalProps) => {
-  const { removeTask, changeTask } = useContext(TaskListContext);
-
   const change = useCallback((task) => {
-    changeTask(task);
     hideModal();
     onShowModalInfo(`Задача «${task.title}» успешно сохранена`);
   }, [taskDataModal]);
 
-  const remove = useCallback((id) => {
-    removeTask(id);
+  const remove = useCallback(() => {
     hideModal();
     onShowModalInfo(`Задача «${taskDataModal.task.title}» успешно удалена`);
   }, [taskDataModal]);
@@ -34,7 +35,7 @@ const TaskDetailModal = ({
     <Modal
       isShowModal={taskDataModal.isShow}
       hideModal={hideModal}
-      title={taskDataModal.type === 'create' ? 'Создание задачи' : 'Изменение задачи'}
+      title={taskDataModal.type === StateType.CREATE ? modalTitle.CREATE : modalTitle.CHANGE}
     >
       <TaskDetail
         taskDataModal={{ task: taskDataModal.task, type: taskDataModal.type }}

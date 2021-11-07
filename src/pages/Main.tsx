@@ -1,16 +1,18 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
+import { useSelector } from 'react-redux';
 import ActionPanel from '../components/ActionPanel';
 import Board from '../components/Board';
-import { TaskListContext } from '../taskContext/TaskContext';
-import { RejectProps, ResolveProps, TaskDataExpanded } from '../types';
+import {
+  InitialTodosStateProps, RejectProps, ResolveProps, TaskDataExpanded,
+} from '../types';
 import usePromisifyComponent from '../hooks/usePromisifyComponent';
 import TaskDetailModal from '../components/TaskDetailModal';
 import newTask from '../static/newTask';
 import ModalInfo from '../components/ModalInfo';
 
 function Main() {
-  const { tasks } = useContext(TaskListContext);
+  const tasks = useSelector((state: InitialTodosStateProps) => state.tasks);
   const [activeTask, setActiveTask] = useState<TaskDataExpanded>(newTask());
   const [modalInfoData, setModalInfoData] = useState({ show: false, title: '' });
 

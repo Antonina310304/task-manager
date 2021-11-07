@@ -1,12 +1,13 @@
 import React, {
-  memo, useCallback, useContext, useEffect, useState,
+  memo, useCallback, useEffect, useState,
 } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { TaskDataExpanded } from '../../types';
 import Container from '../Container';
 import styles from './ActionPanel.module.css';
 import declOfNum from '../../utils/declOfNum';
-import { TaskListContext } from '../../taskContext/TaskContext';
 import Link from '../../primitives/Link';
+import { changeTask, removeTask as removeT } from '../../actions/todosActions';
 
 export interface HeaderProps {
   onCreateNewTask: () => void;
@@ -14,9 +15,8 @@ export interface HeaderProps {
 }
 
 const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
-  const {
-    tasks, changeTask, removeTask,
-  } = useContext(TaskListContext);
+  const dispatch = useDispatch();
+  const tasks = useSelector((state: any) => state.tasks);
 
   const [isEnabledRemove, setIsEnabledRemove] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState({
@@ -27,7 +27,7 @@ const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   /** выделить все задачи */
   const toggleSelectionTasks = useCallback(() => {
     tasks.forEach((task: TaskDataExpanded) => {
-      changeTask({ ...task, checked: !isSelected.selected });
+      dispatch(changeTask({ ...task, checked: !isSelected.selected }));
     });
   }, [isSelected]);
 
@@ -36,7 +36,7 @@ const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
     const titles = ['задача', 'задачи', 'задач'];
     tasks.forEach((task: TaskDataExpanded) => {
       if (task.checked) {
-        removeTask(task.id);
+        dispatch(removeT(task.id));
       }
     });
 
@@ -54,7 +54,7 @@ const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
       )}`;
 
     onShowModalInfo(titleModal);
-  }, [tasks, removeTask]);
+  }, [tasks]);
 
   /**
    * при изменении таска проверяю меняю состояние кнопок "выделить все и удалить выделенное"

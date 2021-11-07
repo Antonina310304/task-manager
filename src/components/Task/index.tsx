@@ -1,11 +1,12 @@
-import React, { memo, useCallback, useContext } from 'react';
+import React, { memo, useCallback } from 'react';
 import cn from 'classnames';
 
+import { useDispatch } from 'react-redux';
 import { TaskDataExpanded } from '../../types';
 import styles from './Task.module.css';
-import { TaskListContext } from '../../taskContext/TaskContext';
 import statusType from '../../static/statusType';
 import Link from '../../primitives/Link';
+import { changeTask, removeTask } from '../../actions/todosActions';
 
 export interface TaskProps {
   taskData: TaskDataExpanded;
@@ -18,16 +19,16 @@ const Task = ({
   showTaskDetails,
   onShowModalInfo,
 }: TaskProps) => {
-  const { changeTask, removeTask } = useContext(TaskListContext);
+  const dispatch = useDispatch();
 
   const remove = useCallback(() => {
-    removeTask(taskData.id);
+    dispatch(removeTask(taskData.id));
     onShowModalInfo(`Задача ${taskData.title} удалена`);
-  }, [removeTask, taskData.id]);
+  }, [taskData.id]);
 
   const change = useCallback(() => {
-    changeTask({ ...taskData, checked: !taskData.checked });
-  }, [changeTask, taskData]);
+    dispatch(changeTask({ ...taskData, checked: !taskData.checked }));
+  }, [taskData]);
 
   return (
     <div className={cn(styles.task, { [styles.checked]: taskData.checked })}>

@@ -1,5 +1,7 @@
 import { ComponentType } from 'react';
 import ANY from './static/any';
+// eslint-disable-next-line import/no-cycle
+import TodoAction from './static/TodoAction';
 
 export type TaskStatusData = 'done' | 'progress' | 'created';
 
@@ -50,6 +52,7 @@ export type DisplayFieldsType = Record<ValidatedFields, any> &
 };
 
 export type ActionType = 'checked' | 'remove' | 'change';
+
 export type ViewLink = 'default' | 'delete' | 'icon' | 'nav' | 'primary' | 'secondary';
 
 export interface RemoveTaskProps {
@@ -76,3 +79,20 @@ export const TypeLinkData:Record<TypeLink, TypeLink> = {
   link: 'link',
   button: 'button',
 };
+
+export interface InitialTodosStateProps {
+  tasks: TaskDataExpanded[] | [];
+  anotherParam: any
+}
+
+interface IChangeTaskAction {
+  type: typeof TodoAction.CHANGE
+  payload: TaskDataExpanded
+}
+
+interface IRemoveTaskAction {
+  type: typeof TodoAction.REMOVE
+  payload: { id: number }
+}
+
+export type TaskActionTypes = IChangeTaskAction | IRemoveTaskAction;
