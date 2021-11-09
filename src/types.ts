@@ -82,7 +82,6 @@ export const TypeLinkData:Record<TypeLink, TypeLink> = {
 
 export interface InitialTodosStateProps {
   tasks: TaskDataExpanded[] | [];
-  anotherParam: any
 }
 
 interface IChangeTaskAction {

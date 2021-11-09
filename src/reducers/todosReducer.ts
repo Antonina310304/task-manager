@@ -3,7 +3,6 @@ import { InitialTodosStateProps, TaskActionTypes, TaskDataExpanded } from '../ty
 
 const initialTodosState:InitialTodosStateProps = {
   tasks: [],
-  anotherParam: null,
 };
 
 const todosReducer = (
