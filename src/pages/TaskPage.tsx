@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskDetail from '../components/TaskDetail';
 import Container from '../components/Container';
-import { removeTask } from '../actions/todosActions';
+import { changeTaskData, deleteTask } from '../store/tasksSlice';
 import StateType from '../static/StateType';
 
 type RouteParams = {
@@ -13,15 +13,16 @@ type RouteParams = {
 const TaskPage = ({ match, history }: RouteComponentProps<RouteParams>) => {
   const dispatch = useDispatch();
   const taskId = Number(match.params.id);
-  const tasks = useSelector((state: any) => state.tasks);
+  const tasks = useSelector((state: any) => state.tasks.tasks);
   const task = tasks.find((t: any) => t.id === taskId);
 
-  const change = useCallback(() => {
+  const change = useCallback((changedTask) => {
+    dispatch(changeTaskData(changedTask));
     history.push('/');
   }, []);
 
   const remove = useCallback(() => {
-    dispatch(removeTask(task.task.id));
+    dispatch(deleteTask(tasks));
     history.push('/');
   }, []);
 

@@ -7,19 +7,9 @@ const displayFields: DisplayFieldsType = {
     inputName: 'title',
     type: 'text',
   },
-  text: {
-    placeholder: 'Описание задачи',
-    inputName: 'text',
-    type: 'text',
-  },
-  dateCreate: {
-    placeholder: 'Дата создания задачи',
-    inputName: 'dateCreate',
-    type: 'date',
-  },
-  status: {
+  completed: {
     placeholder: 'Статус',
-    inputName: 'status',
+    inputName: 'completed',
     type: 'select',
   },
 };

@@ -12,8 +12,7 @@ export interface TaskListProps {
 }
 
 const Board = ({ onShowModalInfo, onShowTaskDetails }: TaskListProps) => {
-  const tasks = useSelector((state: any) => state.tasks);
-  console.log(tasks);
+  const tasks = useSelector((state: any) => state.tasks.tasks);
   return (
     <div className={styles.board}>
       <BoardTitle count={tasks.length} />

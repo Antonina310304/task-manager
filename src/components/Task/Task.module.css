@@ -37,6 +37,7 @@
     position: relative;
     padding-left: 45px;
     cursor: pointer;
+    background: var(--color-middle-gray);
 }
 
 .status:before {

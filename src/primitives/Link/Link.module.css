@@ -36,6 +36,11 @@
     color: var(--color-dark-green);
 }
 
+.disabledLink {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .icon {
     width: auto;
     height: auto;

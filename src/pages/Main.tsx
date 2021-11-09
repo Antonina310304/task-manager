@@ -3,19 +3,17 @@ import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ActionPanel from '../components/ActionPanel';
 import Board from '../components/Board';
-import {
-  InitialTodosStateProps, RejectProps, ResolveProps, TaskDataExpanded,
-} from '../types';
+import { RejectProps, ResolveProps, TaskDataExpanded } from '../types';
 import usePromisifyComponent from '../hooks/usePromisifyComponent';
 import TaskDetailModal from '../components/TaskDetailModal';
 import newTask from '../static/newTask';
 import ModalInfo from '../components/ModalInfo';
 
 function Main() {
-  const tasks = useSelector((state: InitialTodosStateProps) => state.tasks);
+  const tasks = useSelector((state: any) => state.tasks.tasks);
   const [activeTask, setActiveTask] = useState<TaskDataExpanded>(newTask());
+  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
   const [modalInfoData, setModalInfoData] = useState({ show: false, title: '' });
-
   const hideModal = useCallback(() => {
     setModalInfoData(((prevState) => ({ ...prevState, show: false })));
   }, []);
@@ -53,13 +51,13 @@ function Main() {
         onCreateNewTask={createNewTask}
         onShowModalInfo={showModalInfo}
       />
-      <Board
+       <Board
         onShowTaskDetails={showTaskDetail}
         onShowModalInfo={showModalInfo}
-      />
-      {modalTaskDetail}
+       />
+       {modalTaskDetail}
 
-      <ModalInfo isShowModal={modalInfoData.show}
+       <ModalInfo isShowModal={modalInfoData.show}
                  modalText={modalInfoData.title}
                  onHideModal={hideModal}/>
     </div>

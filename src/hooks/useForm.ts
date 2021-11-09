@@ -19,7 +19,6 @@ const useForm = (task: TaskDataExpanded, validationRules: ValidationRulesType) =
     debounceRef.current = _debounce((evt: any) => {
       const { name } = evt.target;
       const value = evt.target.value.trim();
-
       fields[name].onChange(value);
     }, DEBOUNCE_TIMEOUT);
   }, [fields]);
@@ -33,7 +32,6 @@ const useForm = (task: TaskDataExpanded, validationRules: ValidationRulesType) =
   useEffect(() => {
     const isCorrectField = Object.keys(fields).every((field: string) => !fields[field].error);
     const isChanged = Object.keys(fields).some((field: string) => fields[field].isDirty);
-
     setDisabledBtn(!(isCorrectField && isChanged));
   }, [fields]);
 

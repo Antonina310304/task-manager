@@ -3,8 +3,7 @@ import React, {
   useCallback,
   useMemo,
 } from 'react';
-import { useDispatch } from 'react-redux';
-import { TaskDataExpanded, ValidatedFields } from '../../types';
+import { TaskDataExpanded, TaskStatusData, ValidatedFields } from '../../types';
 import displayFields from '../../static/displayFields';
 import statusType from '../../static/statusType';
 import Select from '../../primitives/Select';
@@ -12,15 +11,13 @@ import Alert from '../../primitives/Alert';
 import Input from '../../primitives/Input';
 import useForm from '../../hooks/useForm';
 import validationRules from '../../static/validationRules';
-import transformDate from '../../utils/transformDate';
 import Link from '../../primitives/Link';
-import { changeTask, removeTask as removeT } from '../../actions/todosActions';
 import styles from './TaskDetail.module.css';
 
 export interface TaskDetailProps {
   className?: string;
   taskDataModal: { task: TaskDataExpanded; type: string };
-  removeTask: (arg: number) => void;
+  removeTask: (arg: any) => void;
   hideModal?: () => void;
   changeTaskList: (arg?: any) => void;
 }
@@ -30,27 +27,20 @@ const TaskDetail = ({
   removeTask,
   changeTaskList,
 }: TaskDetailProps) => {
-  const dispatch = useDispatch();
   const isNewTask = useMemo(() => taskDataModal.type === 'create', [taskDataModal]);
-
   const [disabledBtn, fields, handlerInputChange] = useForm(taskDataModal.task, validationRules);
 
   const remove = useCallback(() => {
-    removeTask(taskDataModal.task.id);
-    dispatch(removeT(taskDataModal.task.id));
+    removeTask(taskDataModal.task);
   }, [removeTask, taskDataModal.task.id]);
 
   const onSave = useCallback(() => {
     const task = {
       ...taskDataModal.task,
       title: fields.title.value,
-      status: fields.status.value,
-      dateCreate: fields.dateCreate.value,
-      text: fields.text.value,
+      completed: fields.completed.value,
     };
     changeTaskList(task);
-
-    dispatch(changeTask(task));
   }, [changeTaskList, taskDataModal.task, fields]);
 
   return (
@@ -70,8 +60,8 @@ const TaskDetail = ({
               </div>
               {currentField.type === 'select'
                 ? <Select
-                  name={'status'}
-                  defaultValue={fields.status.value}
+                  name={'completed'}
+                  defaultValue={statusType[fields.completed as TaskStatusData]}
                   values={statusType}
                   onChange={handlerInputChange}
                 />
@@ -81,11 +71,7 @@ const TaskDetail = ({
                   }
                   inputName={currentField.inputName}
                   type={currentField.type}
-                  defaultValue={
-                    currentField.type === 'date'
-                      ? transformDate(fields[field as ValidatedFields].value)
-                      : fields[field as ValidatedFields].value
-                  }
+                  defaultValue={fields[field as ValidatedFields].value}
                   onChange={handlerInputChange}
                   onBlur={fields[field].onBlur}
                 />

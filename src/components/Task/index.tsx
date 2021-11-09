@@ -2,11 +2,11 @@ import React, { memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import { useDispatch } from 'react-redux';
-import { TaskDataExpanded } from '../../types';
+import { TaskDataExpanded, TaskStatusData } from '../../types';
 import styles from './Task.module.css';
 import statusType from '../../static/statusType';
 import Link from '../../primitives/Link';
-import { changeTask, removeTask } from '../../actions/todosActions';
+import { changeTask, deleteTask } from '../../store/tasksSlice';
 
 export interface TaskProps {
   taskData: TaskDataExpanded;
@@ -22,7 +22,7 @@ const Task = ({
   const dispatch = useDispatch();
 
   const remove = useCallback(() => {
-    dispatch(removeTask(taskData.id));
+    dispatch(deleteTask(taskData));
     onShowModalInfo(`Задача ${taskData.title} удалена`);
   }, [taskData.id]);
 
@@ -42,17 +42,17 @@ const Task = ({
       <label
         htmlFor={`task-${taskData.id}`}
         className={cn(styles.status, {
-          [styles.create]: taskData.status === 'created',
-          [styles.done]: taskData.status === 'done',
-          [styles.progress]: taskData.status === 'progress',
+          [styles.done]: taskData.completed,
+          [styles.progress]: !taskData.completed,
         })}
       >
-        <p className={styles.statusName}>{statusType[taskData.status]}</p>
+        <p className={styles.statusName}>
+          {statusType[taskData.completed as TaskStatusData]}
+        </p>
       </label>
       <div className={styles.wrapper}>
         <div>
-          <p className={styles.title}>{taskData.title}</p>
-          <p className={styles.title}>{taskData.text}</p>
+          <p className={styles.title}>{`${taskData.title} ${taskData.id}`}</p>
         </div>
         <div className={styles.buttonsWrapper}>
           <div className={styles.wrapperXs}>

@@ -6,17 +6,7 @@ const validationRules: ValidationRulesType = {
     minLength: 3,
     isEmpty: true,
   },
-
-  text: {
-    minLength: 3,
-    isEmpty: true,
-  },
-
-  dateCreate: {
-    minLength: 3,
-    isEmpty: true,
-  },
-  status: {
+  completed: {
     isEmpty: true,
   },
 };

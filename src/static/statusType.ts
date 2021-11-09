@@ -3,9 +3,8 @@ import { TaskStatusData } from '../types';
 export type StatusTypeProps = Record<TaskStatusData, string>;
 
 const statusType: StatusTypeProps = {
-  done: 'Выполнено',
-  progress: 'Выполняется',
-  created: 'Создана',
+  true: 'Выполнено',
+  false: 'Выполняется',
 };
 
 export default statusType;

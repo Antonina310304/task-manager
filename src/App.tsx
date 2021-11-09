@@ -1,34 +1,33 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import './theme.css';
 import {
   BrowserRouter, Redirect, Route, Switch,
 } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTodos } from './store/tasksSlice';
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import ANY from './static/any';
-import Main from './pages/Main';
-import Error from './pages/Error';
-import Nav from './components/Nav';
 import TaskPage from './pages/TaskPage';
 import Aut from './pages/Aut';
 import Description from './pages/Description';
 import Personal from './pages/Personal';
+import Main from './pages/Main';
+import Error from './pages/Error';
+import Nav from './components/Nav';
 import { LinkProps } from './types';
-
-import rootReducer from './reducers/todosReducer';
-
-// eslint-disable-next-line no-underscore-dangle
-const store = createStore(rootReducer, (window as any).__REDUX_DEVTOOLS_EXTENSION__
-// eslint-disable-next-line no-underscore-dangle
-  && (window as any).__REDUX_DEVTOOLS_EXTENSION__());
+import ANY from './static/any';
 
 function App() {
   const [isAuth, setAuth] = useState(false);
-
+  const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+  const { error, status } = useSelector((state: any) => state.tasks);
   const WithAut = (props: any) => <Aut {...props} setAuth={setAuth}/>;
   const WithPersonal = (props: any) => <Personal {...props} setAuth={setAuth}/>;
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   const links: LinkProps[] = useMemo(() => (
     [
@@ -54,24 +53,24 @@ function App() {
   ), []);
 
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Nav links={links.filter((item: any) => item.nav)}
-             isAuth={isAuth}
-             setAuth={setAuth}/>
-        {
-          <Switch>
-            {links.filter((item: any) => item.autAccess === isAuth
-              || item.autAccess === ANY)
-              .map((item: any) => (
-                <Route key={item.path} path={item.path}
-                       component={item.component} exact={item.exact}/>
-              ))}
-            <Redirect to='/error' exact/>
-          </Switch>
-        }
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Nav links={links.filter((item: any) => item.nav)}
+           isAuth={isAuth}
+           setAuth={setAuth}
+           error={error}
+      />
+      {
+        <Switch>
+          {links.filter((item: any) => item.autAccess === isAuth
+            || item.autAccess === ANY)
+            .map((item: any) => (
+              <Route key={item.path} path={item.path}
+                     component={item.component} exact={item.exact}/>
+            ))}
+          <Redirect to='/error' exact/>
+        </Switch>
+      }
+    </BrowserRouter>
   );
 }
 

@@ -10,7 +10,7 @@ interface LinkProp {
   className?: string;
   view: ViewLink;
   onClick?: () => void;
-  disabled?: boolean;
+  disabled?: boolean | null;
   children?: ReactNode;
 }
 
@@ -30,11 +30,13 @@ const Link = ({
     [styles.icon]: view === 'icon',
     [styles.nav]: view === 'nav',
   }), [view]);
-
   return (
     <>
       {type === TypeLinkData.nav && (
-          <NavLink className={cn(styles.link, styleView, className)}
+          <NavLink className={cn(styles.link,
+            styleView,
+            className,
+            disabled && styles.disabledLink)}
                    exact
                    activeClassName={styles.active}
                    to={href || ''}>
@@ -43,13 +45,13 @@ const Link = ({
 
       )}
       {type === TypeLinkData.link && (
-          <RouterLink className={cn(styles.link, styleView, className)} to={href || ''}>
+          <RouterLink className={cn(styles.link, styleView, className, disabled && styles.disabledLink)} to={href || ''}>
             {children}
           </RouterLink>
       )}
       {type === TypeLinkData.button && (
           <button
-              disabled={disabled}
+              disabled={!!disabled}
               className={cn(styles.link, className, styleView)}
               onClick={() => {
                 if (onClick) {

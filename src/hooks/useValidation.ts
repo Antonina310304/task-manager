@@ -33,10 +33,10 @@ const useValidation = (value: any, validations: any) => {
           }));
           break;
         case 'isEmpty':
-          if (!value) {
+          if (!String(value)) {
             setTextError(ERRORS_ALERT.isEmpty);
           }
-          setErrors((prevState) => ({ ...prevState, isEmpty: !value }));
+          setErrors((prevState) => ({ ...prevState, isEmpty: !String(value) }));
           break;
         default:
           break;

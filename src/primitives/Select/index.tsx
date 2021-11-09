@@ -7,7 +7,7 @@ import { TaskStatusData } from '../../types';
 export interface SelectProps {
   className?: string;
   name: string;
-  defaultValue: string;
+  defaultValue: any;
   values: StatusTypeProps;
   onChange?: (arg: React.FormEvent) => void;
 }
@@ -20,20 +20,20 @@ const Select = ({
   onChange,
 }: SelectProps) => (
   <div className={className}>
-  <select
-    className={styles.select}
-data-name={name}
-name={name}
-defaultValue={defaultValue}
-onChange={onChange}
-  >
-  {Object.keys(values).map((item) => (
-      <option key={item} value={item}>
-    {values[item as TaskStatusData]}
-    </option>
-  ))}
-</select>
-</div>
+    <select
+      className={styles.select}
+      data-name={name}
+      name={name}
+      defaultValue={defaultValue}
+      onChange={onChange}
+    >
+      {Object.keys(values).map((item) => (
+        <option key={item} value={item}>
+          {values[item as TaskStatusData]}
+        </option>
+      ))}
+    </select>
+  </div>
 );
 
 export default memo(Select);

@@ -3,7 +3,7 @@ import ANY from './static/any';
 // eslint-disable-next-line import/no-cycle
 import TodoAction from './static/TodoAction';
 
-export type TaskStatusData = 'done' | 'progress' | 'created';
+export type TaskStatusData = 'true' | 'false';
 
 export type State = 'create' | 'change';
 
@@ -12,9 +12,9 @@ export type InputType = 'text' | 'date';
 export interface TaskData {
   id: number;
   title: string;
-  text: string;
-  status: TaskStatusData;
-  dateCreate: Date;
+  status?: TaskStatusData;
+  dateCreate?: string;
+  completed?: TaskStatusData;
 }
 
 export interface ResolveProps {
@@ -29,7 +29,7 @@ export interface TaskDataExpanded extends TaskData {
   checked?: boolean;
 }
 
-export type ValidatedFields = 'title' | 'text' | 'dateCreate' | 'status';
+export type ValidatedFields = 'title' | 'completed';
 
 export type Keys = Record<keyof TypesErrors, boolean>;
 

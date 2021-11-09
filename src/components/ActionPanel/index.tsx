@@ -7,7 +7,7 @@ import Container from '../Container';
 import styles from './ActionPanel.module.css';
 import declOfNum from '../../utils/declOfNum';
 import Link from '../../primitives/Link';
-import { changeTask, removeTask as removeT } from '../../actions/todosActions';
+import { addTask, removeTask as removeT } from '../../store/tasksSlice';
 
 export interface HeaderProps {
   onCreateNewTask: () => void;
@@ -16,7 +16,7 @@ export interface HeaderProps {
 
 const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state: any) => state.tasks);
+  const tasks = useSelector((state: any) => state.tasks.tasks);
 
   const [isEnabledRemove, setIsEnabledRemove] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState({
@@ -27,7 +27,7 @@ const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   /** выделить все задачи */
   const toggleSelectionTasks = useCallback(() => {
     tasks.forEach((task: TaskDataExpanded) => {
-      dispatch(changeTask({ ...task, checked: !isSelected.selected }));
+      dispatch(addTask({ ...task, checked: !isSelected.selected }));
     });
   }, [isSelected]);
 
