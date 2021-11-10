@@ -1,7 +1,7 @@
 body {
-    background: transparent;
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+    background: red;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
 }
