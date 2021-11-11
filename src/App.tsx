@@ -1,6 +1,4 @@
-import React, {
-  createContext, useCallback, useEffect, useState,
-} from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
 import './theme.css';
 import {
@@ -8,30 +6,24 @@ import {
 } from 'react-router-dom';
 import Nav from './components/Nav';
 import AppRouter from './components/AppRouter';
+import AuthContext from './AuthContext/AuthContext';
 
-export const AuthContext = createContext<any>(null);
+const AUTH = 'auth';
+const userIsAut = () => localStorage.getItem('auth') === 'true';
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem('auth') === 'true') {
-      setIsAuth(true);
-    }
-  }, []);
+  const [isAuth, setIsAuth] = useState(userIsAut());
 
   const toggleAuth = useCallback((newState: boolean) => {
     setIsAuth(newState);
-    localStorage.setItem('auth', String(newState));
+    localStorage.setItem(AUTH, String(newState));
   }, []);
 
   return (
     <AuthContext.Provider value={{ isAuth, toggleAuth }}>
       <BrowserRouter>
-        <>
-          <Nav/>
-          <AppRouter/>
-        </>
+        <Nav/>
+        <AppRouter/>
       </BrowserRouter>
     </AuthContext.Provider>
   );

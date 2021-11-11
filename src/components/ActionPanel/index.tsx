@@ -7,11 +7,20 @@ import styles from './ActionPanel.module.css';
 import declOfNum from '../../utils/declOfNum';
 import { TaskListContext } from '../../taskContext/TaskContext';
 import Link from '../../primitives/Link';
+import viewBtn from '../../static/ViewBtn';
+import typeLink from '../../static/typeLink';
 
 export interface HeaderProps {
   onCreateNewTask: () => void;
   onShowModalInfo: (data: string) => void;
 }
+
+const btnText = {
+  CREATE: 'создать задачу',
+  CHECKED: 'выделить все',
+  UNCHECKED: 'снять выделение',
+  REMOVE: 'Удалить выделенное',
+};
 
 const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   const {
@@ -77,26 +86,30 @@ const ActionPanel = ({ onCreateNewTask, onShowModalInfo }: HeaderProps) => {
   return (
     <Container className={styles.panel}>
       <div className={styles.wrapper}>
-        <Link type={'button'} className={styles.button} view="primary" onClick={onCreateNewTask}>
-          создать задачу
+        <Link
+          type={typeLink.button}
+          className={styles.button}
+              view={viewBtn.primary}
+          onClick={onCreateNewTask}>
+          {btnText.CREATE}
         </Link>
         <Link
-          type={'button'}
+          type={typeLink.button}
           className={styles.button}
           onClick={toggleSelectionTasks}
-          view="default"
+          view={viewBtn.default}
           disabled={isSelected.disabled}
         >
-          {isSelected.selected ? 'снять выделение' : 'выделить все'}
+          {isSelected.selected ? btnText.UNCHECKED : btnText.CHECKED}
         </Link>
         <Link
-          type={'button'}
+          type={typeLink.button}
           className={styles.button}
-          view="delete"
+          view={viewBtn.delete}
           disabled={!isEnabledRemove}
           onClick={removeSelectedTask}
         >
-          Удалить выделенное
+          {btnText.REMOVE}
         </Link>
       </div>
     </Container>

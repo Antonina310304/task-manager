@@ -8,14 +8,14 @@ import TaskPage from '../../pages/TaskPage';
 import Description from '../../pages/Description';
 import Aut from '../../pages/Aut';
 import Personal from '../../pages/Personal';
-import { AuthContext } from '../../App';
 import TaskContext from '../../taskContext/TaskContext';
 import pathPages from '../../static/pathPages';
+import AuthContext from '../../AuthContext/AuthContext';
 
 const links: LinkProps[] = [
   {
     autAccess: true,
-    path: 'tasks',
+    path: pathPages.main,
     component: Main,
     exact: true,
   },
@@ -27,7 +27,7 @@ const links: LinkProps[] = [
   },
   {
     autAccess: true,
-    path: 'tasks/:id',
+    path: pathPages.tasks,
     component: TaskPage,
     exact: true,
   },
@@ -63,8 +63,8 @@ const AppRouter = () => {
             <Route key={item.path} path={`/${item.path}`}
                    component={item.component} exact={item.exact}/>
           ))}
-         {isAuth && (<Redirect to='/error' exact/>)}
-         {!isAuth && (<Redirect to='/aut' exact/>)}
+         {isAuth && (<Redirect to={`/${pathPages.error}`} exact/>)}
+         {!isAuth && (<Redirect to={`/${pathPages.aut}`} exact/>)}
       </Switch>
     </TaskContext>
   );

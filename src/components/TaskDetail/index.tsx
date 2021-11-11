@@ -4,8 +4,6 @@ import React, {
   useMemo,
 } from 'react';
 
-import styles from './TaskDetail.module.css';
-
 import { TaskDataExpanded, ValidatedFields } from '../../types';
 import displayFields from '../../static/displayFields';
 import statusType from '../../static/statusType';
@@ -16,6 +14,9 @@ import useForm from '../../hooks/useForm';
 import validationRules from '../../static/validationRules';
 import transformDate from '../../utils/transformDate';
 import Link from '../../primitives/Link';
+import styles from './TaskDetail.module.css';
+import viewBtn from '../../static/ViewBtn';
+import typeLink from '../../static/typeLink';
 
 export interface TaskDetailProps {
   className?: string;
@@ -24,6 +25,15 @@ export interface TaskDetailProps {
   hideModal?: () => void;
   changeTaskList: (data: TaskDataExpanded) => void;
 }
+
+const SELECT = 'select';
+const DATE = 'date';
+
+const btnName = {
+  CREATE: 'Создать',
+  SAVE: 'Сохранить',
+  REMOVE: 'Удалить',
+};
 
 const TaskDetail = ({
   taskDataModal,
@@ -63,7 +73,7 @@ const TaskDetail = ({
                   <Alert textError={fields[field].textError} />
                 )}
               </div>
-              {currentField.type === 'select'
+              {currentField.type === SELECT
                 ? <Select
                   name={'status'}
                   defaultValue={fields.status.value}
@@ -77,7 +87,7 @@ const TaskDetail = ({
                   inputName={currentField.inputName}
                   type={currentField.type}
                   defaultValue={
-                    currentField.type === 'date'
+                    currentField.type === DATE
                       ? transformDate(fields[field as ValidatedFields].value)
                       : fields[field as ValidatedFields].value
                   }
@@ -91,16 +101,19 @@ const TaskDetail = ({
       })}
       <div className={styles.buttonsGroup}>
         <div className={styles.buttonWrapper}>
-          <Link type={'button'} disabled={disabledBtn} onClick={onSave} view={'primary'}>
-            {isNewTask ? 'Создать' : 'Сохранить'}
+          <Link type={typeLink.button}
+                disabled={disabledBtn}
+                onClick={onSave}
+                view={viewBtn.primary}>
+            {isNewTask ? btnName.CREATE : btnName.SAVE}
           </Link>
         </div>
 
         {!isNewTask && (
           <div className={styles.buttonWrapper}>
             <div>
-              <Link type={'button'} onClick={remove} view={'delete'}>
-                Удалить
+              <Link type={typeLink.button} onClick={remove} view={viewBtn.delete}>
+                {btnName.REMOVE}
               </Link>
             </div>
           </div>

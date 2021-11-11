@@ -1,6 +1,6 @@
-import { TaskStatusData } from '../types';
+import { ITaskStatus } from '../types';
 
-export type StatusTypeProps = Record<TaskStatusData, string>;
+export type StatusTypeProps = Record<ITaskStatus, string>;
 
 const statusType: StatusTypeProps = {
   done: 'Выполнено',

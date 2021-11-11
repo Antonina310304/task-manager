@@ -6,12 +6,20 @@ import styles from './Task.module.css';
 import { TaskListContext } from '../../taskContext/TaskContext';
 import statusType from '../../static/statusType';
 import Link from '../../primitives/Link';
+import typeLink from '../../static/typeLink';
+import viewBtn from '../../static/ViewBtn';
+import taskStatus from '../../static/taskStatus';
 
 export interface TaskProps {
   taskData: TaskDataExpanded;
   showTaskDetails: (arg: number) => void;
   onShowModalInfo: (arg: string) => void;
 }
+const btnText = {
+  CNANGE: 'Изменить',
+  REMOVE: 'Удалить',
+  DETAIL: 'Подробнее',
+};
 
 const Task = ({
   taskData,
@@ -41,9 +49,9 @@ const Task = ({
       <label
         htmlFor={`task-${taskData.id}`}
         className={cn(styles.status, {
-          [styles.create]: taskData.status === 'created',
-          [styles.done]: taskData.status === 'done',
-          [styles.progress]: taskData.status === 'progress',
+          [styles.create]: taskData.status === taskStatus.CREATED,
+          [styles.done]: taskData.status === taskStatus.DONE,
+          [styles.progress]: taskData.status === taskStatus.PROGRESS,
         })}
       >
         <p className={styles.statusName}>{statusType[taskData.status]}</p>
@@ -55,18 +63,23 @@ const Task = ({
         </div>
         <div className={styles.buttonsWrapper}>
           <div className={styles.wrapperXs}>
-            <Link view='primary' href={`/tasks/${taskData.id}`} type={'link'} onClick={() => showTaskDetails(taskData.id)}>
-              подробнее
+            <Link view={viewBtn.primary}
+                  href={`/tasks/${taskData.id}`}
+                  type={typeLink.link}
+                  onClick={() => showTaskDetails(taskData.id)}>
+              {btnText.DETAIL}
             </Link>
           </div>
           <div className={styles.wrapperXs}>
-            <Link view="delete" onClick={remove} type={'button'}>
-              удалить
+            <Link view={viewBtn.delete} onClick={remove} type={typeLink.button}>
+              {btnText.REMOVE}
             </Link>
           </div>
           <div className={styles.wrapperXs}>
-            <Link view="default" onClick={() => showTaskDetails(taskData.id)} type={'button'}>
-              изменить
+            <Link view={viewBtn.default}
+                  onClick={() => showTaskDetails(taskData.id)}
+                  type={typeLink.button}>
+              {btnText.CNANGE}
             </Link>
           </div>
         </div>

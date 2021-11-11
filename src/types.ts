@@ -1,7 +1,7 @@
 import { ComponentType } from 'react';
 import ANY from './static/any';
 
-export type TaskStatusData = 'done' | 'progress' | 'created';
+export type ITaskStatus = 'done' | 'progress' | 'created';
 
 export type State = 'create' | 'change';
 
@@ -11,7 +11,7 @@ export interface TaskData {
   id: number;
   title: string;
   text: string;
-  status: TaskStatusData;
+  status: ITaskStatus;
   dateCreate: Date;
 }
 
@@ -67,9 +67,3 @@ export interface LinkProps {
 }
 
 export type TypeLink = 'nav' | 'link' | 'button';
-
-export const TypeLinkData:Record<TypeLink, TypeLink> = {
-  nav: 'nav',
-  link: 'link',
-  button: 'button',
-};
