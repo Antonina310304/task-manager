@@ -53,6 +53,7 @@ const links: LinkProps[] = [
 
 const AppRouter = () => {
   const { isAuth } = useContext(AuthContext);
+
   return (
     <TaskContext>
       <Switch>

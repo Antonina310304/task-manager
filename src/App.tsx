@@ -28,8 +28,10 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ isAuth, toggleAuth }}>
       <BrowserRouter>
-        <Nav/>
-        <AppRouter/>
+        <>
+          <Nav/>
+          <AppRouter/>
+        </>
       </BrowserRouter>
     </AuthContext.Provider>
   );

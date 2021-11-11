@@ -24,6 +24,7 @@ module.exports = {
         '@typescript-eslint',
     ],
     "rules": {
-        "import/extensions": ["off"]
+        "import/extensions": ["off"],
+      "linebreak-style": 0
     },
 };

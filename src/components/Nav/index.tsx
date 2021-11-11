@@ -17,7 +17,8 @@ const links: any = [
 const Nav = ({ history }: RouteComponentProps) => {
   const { isAuth, toggleAuth } = useContext(AuthContext);
 
-  console.log(pathPages);
+  console.log(history);
+
   const onClick = useCallback(() => {
     toggleAuth(!isAuth);
     history.push(`${pathPages.main}`);
@@ -29,10 +30,7 @@ const Nav = ({ history }: RouteComponentProps) => {
         <div className={styles.links}>
           {links
             .filter((item: any) => item.autAccess === isAuth)
-            .map((item: any, idx: number) => {
-              console.log(history.location.pathname.indexOf(item.href));
-              console.log(item.href, history.location.pathname);
-              return (
+            .map((item: any, idx: number) => (
                 <Link
                   className={
                     history.location.pathname.indexOf(item.href) !== -1 ? styles.active : ''
@@ -44,8 +42,7 @@ const Nav = ({ history }: RouteComponentProps) => {
                 >
                   {item.title}
                 </Link>
-              );
-            })}
+            ))}
           <Link
             className={'styles.link'}
             view={'nav'}
