@@ -15,7 +15,7 @@ import pathPages from '../../static/pathPages';
 const links: LinkProps[] = [
   {
     autAccess: true,
-    path: pathPages.main,
+    path: 'tasks',
     component: Main,
     exact: true,
   },
@@ -62,8 +62,8 @@ const AppRouter = () => {
             <Route key={item.path} path={`/${item.path}`}
                    component={item.component} exact={item.exact}/>
           ))}
-        {isAuth && (<Redirect to='/error'/>)}
-        {!isAuth && (<Redirect to='/aut' exact/>)}
+         {isAuth && (<Redirect to='/error' exact/>)}
+         {!isAuth && (<Redirect to='/aut' exact/>)}
       </Switch>
     </TaskContext>
   );

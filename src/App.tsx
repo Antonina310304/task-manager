@@ -11,7 +11,7 @@ import AppRouter from './components/AppRouter';
 
 export const AuthContext = createContext<any>(null);
 
-function App() {
+const App = () => {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
@@ -33,6 +33,6 @@ function App() {
       </BrowserRouter>
     </AuthContext.Provider>
   );
-}
+};
 
 export default App;

@@ -8,7 +8,7 @@ import Container from '../Container';
 import styles from './Nav.module.css';
 
 const links: any = [
-  { href: pathPages.main, title: 'Задачи', autAccess: true },
+  { href: 'tasks', title: 'Задачи', autAccess: true },
   { href: pathPages.personal, title: 'Личный кабинет', autAccess: true },
   { href: pathPages.description, title: 'Описание', autAccess: false },
   { href: pathPages.aut, title: 'Авторизация', autAccess: false },
@@ -20,7 +20,7 @@ const Nav = ({ history }: RouteComponentProps) => {
   console.log(pathPages);
   const onClick = useCallback(() => {
     toggleAuth(!isAuth);
-    history.push(`${pathPages.description}`);
+    history.push(`${pathPages.main}`);
   }, [isAuth]);
 
   return (
