@@ -1,23 +1,26 @@
-import React, { memo, useCallback } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import React, { memo, useCallback, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Link from '../primitives/Link';
 import Container from '../components/Container';
+import pathPages from '../static/pathPages';
+import { AuthContext } from '../App';
 
-interface AutProps extends RouteComponentProps {
-  setAuth: (arg: (prevState: boolean) => boolean) => void;
-}
-
-const Aut = ({ setAuth, history }: AutProps) => {
+const Aut = () => {
+  const history = useHistory();
+  const { toggleAuth } = useContext(AuthContext);
   const onClick = useCallback(() => {
-    setAuth((prevState: boolean) => (!prevState));
-    history.push('/');
+    toggleAuth(true);
+    history.push(`/${pathPages.description}`);
   }, []);
+
+  console.log(onClick);
+
   return (
         <Container>
             <p>Аторизуйстесь, чтобы получить доступ к задачам!</p>
             <Link type={'button'}
                   view={'default'}
-                  onClick={onClick}
+                  // onClick={onClick}
             >
                 Авторизоваться
             </Link>

@@ -60,11 +60,8 @@ export interface ChangeTaskProps {
   (arg: TaskDataExpanded): void
 }
 export interface LinkProps {
-  href: string;
   autAccess: boolean | typeof ANY;
-  title: string;
   path: string;
-  nav: boolean;
   component: ComponentType<any>;
   exact: boolean;
 }

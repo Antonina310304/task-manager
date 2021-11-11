@@ -1,16 +1,15 @@
-import React, { memo, useCallback } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import React, { memo, useCallback, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Container from '../components/Container/Container';
 import Link from '../primitives/Link';
+import { AuthContext } from '../App';
 
-interface PersonalProps extends RouteComponentProps {
-  setAuth: (arg: (prevState: boolean) => boolean) => void;
-}
+const Personal = () => {
+  const history = useHistory();
+  const { toggleAuth } = useContext(AuthContext);
 
-const Personal = ({ setAuth, history }: PersonalProps) => {
-  console.log(setAuth);
   const onClick = useCallback(() => {
-    setAuth((prevState: boolean) => (!prevState));
+    toggleAuth(false);
     history.push('/');
   }, []);
   return (

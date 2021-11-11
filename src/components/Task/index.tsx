@@ -55,7 +55,7 @@ const Task = ({
         </div>
         <div className={styles.buttonsWrapper}>
           <div className={styles.wrapperXs}>
-            <Link view='primary' href={`/task/${taskData.id}`} type={'link'} onClick={() => showTaskDetails(taskData.id)}>
+            <Link view='primary' href={`/tasks/${taskData.id}`} type={'link'} onClick={() => showTaskDetails(taskData.id)}>
               подробнее
             </Link>
           </div>
