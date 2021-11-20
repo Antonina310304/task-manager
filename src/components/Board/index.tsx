@@ -13,6 +13,8 @@ export interface TaskListProps {
 
 const Board = ({ onShowModalInfo, onShowTaskDetails }: TaskListProps) => {
   const tasks = useSelector((state: any) => state.tasks.tasks);
+  const testConst = 'какая-то константа, которую потом надо добавить в ветку test';
+
   return (
     <div className={styles.board}>
       <BoardTitle count={tasks.length} />
