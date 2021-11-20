@@ -17,6 +17,7 @@ const Board = ({ onShowModalInfo, onShowTaskDetails }: TaskListProps) => {
 
   return (
     <div className={styles.board}>
+      <div>какой-то пробный коммит</div>
       <BoardTitle count={tasks.length} />
       <Container>
         {tasks.map((item: TaskDataExpanded) => (
