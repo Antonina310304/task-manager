@@ -1,15 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Container from '../components/Container';
+import Link from '../primitives/Link';
 
 const Error = () => (
     <div>
-      <Container>
-        <h1>Этой страницы не существует...</h1>
-        <Link to={'/'}>
-          Вернуться на главную
-        </Link>
-      </Container>
+        <Container>
+            <p>404 Ошибка</p>
+            <h1>Этой страницы не существует...</h1>
+            <Link view={'secondary'} type={'link'} href={'/'}>
+                Вернуться на главную
+            </Link>
+        </Container>
 
     </div>
 );

@@ -11,6 +11,12 @@ interface TaskDetailModalProps {
   onShowModalInfo: (arg: string) => void;
 }
 
+const btnTitle = {
+  CREATE: 'Создание задачи',
+  CHANGE: 'Изменение задачи',
+};
+const CREATE_TYPE = 'create';
+
 const TaskDetailModal = ({
   hideModal,
   taskDataModal,
@@ -34,7 +40,7 @@ const TaskDetailModal = ({
     <Modal
       isShowModal={taskDataModal.isShow}
       hideModal={hideModal}
-      title={taskDataModal.type === 'create' ? 'Создание задачи' : 'Изменение задачи'}
+      title={taskDataModal.type === CREATE_TYPE ? btnTitle.CREATE : btnTitle.CHANGE}
     >
       <TaskDetail
         taskDataModal={{ task: taskDataModal.task, type: taskDataModal.type }}

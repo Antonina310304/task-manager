@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import styles from './Select.module.css';
 import { StatusTypeProps } from '../../static/statusType';
-import { TaskStatusData } from '../../types';
+import { ITaskStatus } from '../../types';
 
 export interface SelectProps {
   className?: string;
@@ -29,7 +29,7 @@ onChange={onChange}
   >
   {Object.keys(values).map((item) => (
       <option key={item} value={item}>
-    {values[item as TaskStatusData]}
+    {values[item as ITaskStatus]}
     </option>
   ))}
 </select>

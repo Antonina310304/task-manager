@@ -5,7 +5,9 @@ import './animation-styles.css';
 
 import Icon from '../../primitives/Icon';
 
-import Button from '../../primitives/Button';
+import Link from '../../primitives/Link';
+import viewBtn from '../../static/ViewBtn';
+import typeLink from '../../static/typeLink';
 
 export interface ModalType {
   className?: string;
@@ -15,6 +17,9 @@ export interface ModalType {
   hideModal: () => void;
 }
 
+const TIMEOUT = 350;
+const TYPE_ICON = 'close';
+
 const Modal = ({
   isShowModal, hideModal, title, children,
 }: ModalType) => (
@@ -23,7 +28,7 @@ const Modal = ({
       onClick={hideModal}
       in={isShowModal}
       unmountOnExit
-      timeout={350}
+      timeout={TIMEOUT}
       classNames="modal"
     >
       <div className={styles.wrapper}></div>
@@ -37,9 +42,12 @@ const Modal = ({
       onClick={(event: React.FormEvent) => event.stopPropagation()}
     >
       <div className={styles.inner}>
-        <Button view={'icon'} onClick={hideModal} className={styles.close}>
-          <Icon icon={'close'}/>
-        </Button>
+        <Link type={typeLink.button}
+              view={viewBtn.icon}
+              onClick={hideModal}
+              className={styles.close}>
+          <Icon icon={TYPE_ICON}/>
+        </Link>
         {title && <p className={styles.title}>{title}</p>}
         {children}
       </div>

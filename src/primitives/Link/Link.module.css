@@ -1,8 +1,14 @@
-.button {
+.active {
+    color: green;
+}
+
+
+.link {
     display: block;
+    text-decoration: none;
     width: 100%;
     text-align: center;
-    padding: 5px;
+    padding: 5px 10px;
     border: 1px solid var(--color-dark-purple);
     border-radius: 3px;
     text-transform: uppercase;
@@ -10,19 +16,22 @@
     cursor: pointer;
     font-weight: 700;
     color: var(--color-dark-purple);
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 18px;
 }
 
-.button.delete {
+.link.delete {
     border: 1px solid var(--color-light-purple);
     color: var(--color-light-purple);
 }
 
-.button[disabled] {
+.link[disabled] {
     opacity: 0.5;
     cursor: default;
 }
 
-.button.change {
+.link.change {
     border: 1px solid var(--color-dark-green);
     color: var(--color-dark-green);
 }
@@ -32,4 +41,18 @@
     height: auto;
     background: transparent;
     border: none;
+}
+
+
+.nav {
+    border: none;
+    width: auto;
+    color: var(--color-grafit);
+}
+
+.secondary {
+    border: none;
+    width: auto;
+    text-transform: none;
+    color: var(--color-grafit);
 }

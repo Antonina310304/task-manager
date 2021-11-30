@@ -5,14 +5,16 @@ export interface BoardTitleProps {
   count: number;
 }
 
-const BoardTitle = ({ count }: BoardTitleProps) => (
-        <div className={styles.headerBlock}>
-            <h1 className={styles.title}>{count ? 'Список задач' : 'У вас пока нет задач'}</h1>
-            {(count > 0)
-                && <p className={styles.subtitle}>всего {count} задач</p>
-            }
-        </div>
+const title = {
+  EMPTY: 'У вас пока нет задач',
+  NOT_EMPTY: 'Список задач',
+};
 
+const BoardTitle = ({ count }: BoardTitleProps) => (
+  <div className={styles.headerBlock}>
+    <h1 className={styles.title}>{count ? title.NOT_EMPTY : title.EMPTY}</h1>
+    {count > 0 && <p className={styles.subtitle}>всего {count} задач</p>}
+  </div>
 );
 
 export default memo(BoardTitle);

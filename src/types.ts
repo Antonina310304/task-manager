@@ -1,4 +1,7 @@
-export type TaskStatusData = 'done' | 'progress' | 'created';
+import { ComponentType } from 'react';
+import ANY from './static/any';
+
+export type ITaskStatus = 'done' | 'progress' | 'created';
 
 export type State = 'create' | 'change';
 
@@ -8,7 +11,7 @@ export interface TaskData {
   id: number;
   title: string;
   text: string;
-  status: TaskStatusData;
+  status: ITaskStatus;
   dateCreate: Date;
 }
 
@@ -47,6 +50,7 @@ export type DisplayFieldsType = Record<ValidatedFields, any> &
 };
 
 export type ActionType = 'checked' | 'remove' | 'change';
+export type ViewLink = 'default' | 'delete' | 'icon' | 'nav' | 'primary' | 'secondary';
 
 export interface RemoveTaskProps {
   (arg: number): void
@@ -55,3 +59,11 @@ export interface RemoveTaskProps {
 export interface ChangeTaskProps {
   (arg: TaskDataExpanded): void
 }
+export interface LinkProps {
+  autAccess: boolean | typeof ANY;
+  path: string;
+  component: ComponentType<any>;
+  exact: boolean;
+}
+
+export type TypeLink = 'nav' | 'link' | 'button';
